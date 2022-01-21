@@ -8,13 +8,13 @@ import {
 } from '../config'
 
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
-import Market from '../artifacts/contracts/Market.sol/NFTMarket.json'
+import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json'
 
 let rpcEndpoint = null
 
-if (process.env.NEXT_PUBLIC_WORKSPACE_URL) {
-  rpcEndpoint = process.env.NEXT_PUBLIC_WORKSPACE_URL
-}
+// if (process.env.NEXT_PUBLIC_WORKSPACE_URL) {
+//   rpcEndpoint = process.env.NEXT_PUBLIC_WORKSPACE_URL
+// }
 
 export default function Home() {
   const [nfts, setNfts] = useState([])
@@ -23,7 +23,7 @@ export default function Home() {
     loadNFTs()
   }, [])
   async function loadNFTs() {    
-    const provider = new ethers.providers.JsonRpcProvider(rpcEndpoint)
+    const provider = new ethers.providers.JsonRpcProvider("https://polygon-mumbai.infura.io/v3/208dc68df689435cae6ed9c942375e65")
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
     const data = await marketContract.fetchMarketItems()
