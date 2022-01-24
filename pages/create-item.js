@@ -82,26 +82,33 @@ export default function CreateItem() {
 
       return (
         <div className="flex justify-center">
-          <div className="w-1/2 flex flex-col pb-12">
+        {/* className="w-1/2 flex flex-col pb-12" */}
+          <div className="w-1/2 flex flex-col pb-12 mt-10">
             <input 
+              type="text"
               placeholder="Asset Name"
-              className="mt-8 border rounded p-4"
+              // className="mt-8 border rounded p-4"
+              className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
               onChange={e => updateFormInput({ ...formInput, name: e.target.value })}
             />
             <textarea
+              type="text"
               placeholder="Asset Description"
-              className="mt-2 border rounded p-4"
+              // className="mt-2 border rounded p-4"
+              className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
               onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
             />
             <input
+              type="number"
               placeholder="Asset Price in Matic"
-              className="mt-2 border rounded p-4"
+              // className="mt-2 border rounded p-4"
+              className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
               onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
             />
             <input
               type="file"
               name="Asset"
-              className="my-4"
+              className="my-4 text-white"
               onChange={onChange}
             />
             {
@@ -110,7 +117,7 @@ export default function CreateItem() {
                  
               )
             }
-            <button onClick={createMarket} className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg">
+            <button onClick={createMarket} className="font-bold mt-4 border-[#3d4f7c] bg-pink-500 text-white rounded p-4 shadow-lg">
               Create Digital Asset
             </button>
           </div>
