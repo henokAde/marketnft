@@ -3,7 +3,7 @@ import { useWeb3 } from '@3rdweb/hooks';
 import { useEffect } from 'react';
 import { AiFillPlayCircle, } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
-import { shortenAddress } from '../utils/shortenAddress';
+import { shortenAddress } from '../../utils/shortenAddress';
 import { useRouter } from 'next/router'
 
 const ConnectButton = () => {

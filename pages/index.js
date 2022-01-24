@@ -2,6 +2,8 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
+import Image from 'next/image'
+
 
 import {
   nftaddress, nftmarketaddress
@@ -70,7 +72,7 @@ export default function Home() {
           {
             nfts.map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <img src={nft.image} />
+                <img src={nft.image} style={{maxHeight : "300px", minWidth:"cover"}} />
                 <div className="p-4">
                   <p style={{ height: '64px' }} className="text-2xl text-white font-semibold">{nft.name}</p>
                   <div style={{ height: '70px', overflow: 'hidden' }}>
