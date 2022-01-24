@@ -10,11 +10,13 @@ import {
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json'
 
-let rpcEndpoint = null
+// let rpcEndpoint = null
 
 // if (process.env.NEXT_PUBLIC_WORKSPACE_URL) {
 //   rpcEndpoint = process.env.NEXT_PUBLIC_WORKSPACE_URL
 // }
+
+const projectId = "208dc68df689435cae6ed9c942375e65"
 
 export default function Home() {
   const [nfts, setNfts] = useState([])
@@ -23,7 +25,7 @@ export default function Home() {
     loadNFTs()
   }, [])
   async function loadNFTs() {    
-    const provider = new ethers.providers.JsonRpcProvider("https://polygon-mumbai.infura.io/v3/208dc68df689435cae6ed9c942375e65")
+    const provider = new ethers.providers.JsonRpcProvider(`https://polygon-mumbai.infura.io/v3/${projectId}`)
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
     const data = await marketContract.fetchMarketItems()
@@ -60,7 +62,7 @@ export default function Home() {
     await transaction.wait()
     loadNFTs()
   }
-  if (loadingState === 'loaded' && !nfts.length) return (<h1 className="px-20 py-10 text-3xl">No items in marketplace</h1>)
+  if (loadingState === 'loaded' && !nfts.length) return (<h1 className="px-20 py-10 text-gradient text-centertext-3xl">No items in marketplace</h1>)
   return (
     <div className="flex justify-center">
       <div className="px-4" style={{ maxWidth: '1600px' }}>
@@ -70,13 +72,13 @@ export default function Home() {
               <div key={i} className="border shadow rounded-xl overflow-hidden">
                 <img src={nft.image} />
                 <div className="p-4">
-                  <p style={{ height: '64px' }} className="text-2xl font-semibold">{nft.name}</p>
+                  <p style={{ height: '64px' }} className="text-2xl text-white font-semibold">{nft.name}</p>
                   <div style={{ height: '70px', overflow: 'hidden' }}>
                     <p className="text-gray-400">{nft.description}</p>
                   </div>
                 </div>
                 <div className="p-4 bg-black">
-                  <p className="text-2xl mb-4 font-bold text-white">{nft.price} ETH</p>
+                  <p className="text-2xl mb-4 font-bold text-white">{nft.price} Matic</p>
                   <button className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
                 </div>
               </div>

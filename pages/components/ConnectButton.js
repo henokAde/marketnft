@@ -1,32 +1,43 @@
-import React from 'react';
-import { ethers } from 'ethers'
+
+import { useWeb3 } from '@3rdweb/hooks';
+import { useEffect } from 'react';
+import { AiFillPlayCircle, } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
+import { shortenAddress } from '../utils/shortenAddress';
 import { useRouter } from 'next/router'
-import Web3Modal from 'web3modal'
-import { AiFillPlayCircle } from "react-icons/ai";
 
 const ConnectButton = () => {
+    const router = useRouter()
+    const {address, connectWallet} = useWeb3()
 
-    const connectWallet = async () =>{
-        try {
-            
-        } catch (error) {
-            console.log(error);
+    useEffect(() =>{
+      if(address) router.push("/")
+    }, [address])
 
-            throw new Error("No ethereum object");
-        }
-    }
   return (
-        <button
-              type="button"
-            //   onClick={connectWallet}
-              className=" connectButton rounded-full  "
-            >
-              <p className=" flex flex-row justify-center items-center text-white   ">
-              <AiFillPlayCircle className="text-white mr-2" />
-                Connect Wallet
-              </p>
-            </button>
-        )
+      <div>
+   { address ?
+   
+   <div >
+   <p className="flex flex-row justify-center items-center text-gradient ">
+   <CgProfile className=" mr-2 text-gradient"/>
+   {shortenAddress(address)}
+   </p>
+   </div>
+    : (
+      <button
+        type="button"
+        onClick={(() => connectWallet("injected"))}
+        className=" connectButton rounded-full  "
+      >
+        <p className=" flex flex-row justify-center items-center text-white   ">
+        <AiFillPlayCircle className="text-white mr-2" />
+          Connect Wallet
+        </p>
+      </button>)
+      }
+  </div>
+    )
  
 };
 
